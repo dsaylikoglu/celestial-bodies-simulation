@@ -55,6 +55,8 @@ class CelestialBody:
 			# to prevent orbit overlapping
 			if (len(self.orbit) > 1000) and (abs(self.orbit[-1][0]) <= (2 * self.AU)):
 				self.orbit.pop(0)
+			if (len(self.orbit) > 600) and (0 < abs(self.orbit[-1][0]) < (self.AU - 10**4)):
+				self.orbit.pop(0)
 
 			pygame.draw.lines(win, self.color, False, updated_points, 2)
 
@@ -113,7 +115,7 @@ def main():
 	sun.sun = True
 
 	mercury = CelestialBody(0.387 * CelestialBody.AU, 0, 9.5 / CelestialBody.SCALING_FACTOR, DARK_GREY, 3.30 * 10**23)
-	mercury.y_vel = -47.4 * 1000		# for initial velocity
+	mercury.y_vel = -47.4 * 1000 	# for initial velocity
 
 	venus = CelestialBody(0.723 * CelestialBody.AU, 0, 14 / CelestialBody.SCALING_FACTOR, WHITE, 4.8685 * 10**24)
 	venus.y_vel = -35.02 * 1000		# in meters
